@@ -27,9 +27,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users-update','UserController');
 
     Route::get('/location','LocationController@index');
+    Route::post('/location-store','LocationController@store')->name('location-store');
     
     Route::get('/vendor','VendorController@index');
     Route::post('/individual-store','VendorController@individualstore')->name('individual-store');
+    Route::post('/business-store','VendorController@businessstore')->name('business-store');
+    Route::post('/allbusiness-store','VendorController@allbusinessstore')->name('allbusiness-store');
+    Route::post('/allindividual-store','VendorController@allindividualstore')->name('allindividual-store');
+    Route::get('/vendor-edit/{id}','VendorController@edit');
+    Route::put('/vendor-update/{id}','VendorController@update');
 
     Route::resource('products','ProductController');
 });

@@ -18,6 +18,16 @@ class CreateVendorTable extends Migration
             $table->string('number', 50)->unique();
             $table->string('name');
             $table->string('reg_no')->nullable();
+            $table->string('id_card')->nullable();
+            $table->string('vendor_email')->nullable();
+            $table->string('vendor_type')->nullable();
+            $table->string('vendor_no')->nullable();
+            $table->string('rejected_reson')->nullable();
+            $table->string('rejected_by')->nullable();
+            $table->string('rejected_date')->nullable();
+            $table->string('vendor_createdby')->nullable();
+            $table->string('vendor_createddate')->nullable();
+            $table->string('urgent')->nullable()->default("No");
             $table->string('address');
             $table->string('contact_person');
             $table->string('contact_number');
@@ -28,7 +38,10 @@ class CreateVendorTable extends Migration
             $table->string('location');
             $table->string('email');
             $table->string('createdby');
+            $table->string('vendorcreatedby')->nullable();
+            $table->string('vendorcreateddate')->nullable();
             $table->string('status')->nullable()->default("Pending");
+            $table->string('edit_status')->nullable()->default("No");
             $table->string('editby')->nullable();
             $table->timestamps();
         });

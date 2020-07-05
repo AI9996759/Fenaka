@@ -18,6 +18,7 @@ class CreateLocationsTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('email');
+            $table->string('view');
             $table->timestamps();
         });
     }
