@@ -61,6 +61,7 @@
           <span>Vendor Registration</span></a>
       </li>
 
+      @can('role-list')
       <!-- Nav Item - Tables -->
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
@@ -73,6 +74,7 @@
           <i class="fas fa-shapes"></i>
           <span>Item Creation</span></a>
       </li>
+      
 
       <hr class="sidebar-divider my-0">
 
@@ -85,8 +87,31 @@
        </div>
  
        <!-- Nav Item - Charts -->
-       <li class="nav-item {{ 'file' == request()->path() ? 'active' : '' }}">
-         <a class="nav-link" href="/file">
+  
+      <li class="nav-item {{ 'asset' == request()->path() ? 'active' : '' }}">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#inventory" aria-expanded="true" aria-controls="inventory">
+          <i class="fas fa-box"></i>
+          <span>Inventory</span>
+        </a>
+        <div id="inventory" class="collapse " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class=" collapse-item {{ 'asset' == request()->path() ? 'active' : '' }}"  href="/asset">Asset</a>
+          
+            <a class="collapse-item " href="#">Accessory</a>
+
+            <a class="collapse-item" href="#">Categories</a>
+
+            <a class="collapse-item" href="#">Manufacturers</a>
+
+          </div>
+        </div>
+      </li>
+     
+
+
+
+       <li class="nav-item {{ 'servicerequests' == request()->path() ? 'active' : '' }}">
+         <a class="nav-link" href="/servicerequests">
           <i class="fas fa-truck-moving"></i>
            <span>Track Service Requests</span></a>
        </li>
@@ -108,6 +133,7 @@
           </div>
         </div>
       </li>
+      @endcan
       @endcan
 
       <!-- Divider -->

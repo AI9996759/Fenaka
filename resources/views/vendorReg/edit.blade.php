@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-
+Fenaka - Vendor View
 
 @endsection
 
@@ -13,14 +13,17 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-
+                  @if ($vendor->edit_status === 'Edited')
+                  <h3>Vendor View <span class="badge badge-pill badge-info">Last Edited | {{$vendor->editby}} | {{$vendor->updated_at}}</span></h3>
+                  @else
                   <h3 class="m-0 font-weight-bold text-primary">Vendor View</h3>
+                  @endif
                   <br>
-                  <h6 class="m-0 font-weight text-primary"><b>Vendor Reference Number:</b> {{$vendor->number}}</h6>
-                  <h6 class="m-0 font-weight text-primary"><b>Vendor Type: </b>{{$vendor->vendor_type}}</h6>
-                  <h6 class="m-0 font-weight text-primary"><b>Location: </b>{{$vendor->location}}</h6>
-                  <h6 class="m-0 font-weight text-primary"><b>Requested By:</b> {{$vendor->createdby}}</h6>
-                  <h6 class="m-0 font-weight text-primary"><b>Requested Date:</b> {{$vendor->created_at}}</h6>
+                  <h6 class="m-0 font-weight text-dark"><b>Vendor Reference Number:</b> {{$vendor->number}}</h6>
+                  <h6 class="m-0 font-weight text-dark"><b>Vendor Type: </b>{{$vendor->vendor_type}}</h6>
+                  <h6 class="m-0 font-weight text-dark"><b>Location: </b>{{$vendor->location}}</h6>
+                  <h6 class="m-0 font-weight text-dark"><b>Requested By:</b> {{$vendor->createdby}}</h6>
+                  <h6 class="m-0 font-weight text-dark"><b>Requested Date:</b> {{$vendor->created_at}}</h6>
                   <br>
                 </div>
               <form action="{{ url('vendor-update/'.$vendor->id) }}" form class="user" method="POST" enctype="multipart/form-data">
@@ -50,7 +53,7 @@
                   @else
                   <div class="col-sm-6">
                     <label ><b>VAT Registration No</b></label>
-                    <input type="text" name="reg_no" required value="{{$vendor->reg_no}}" class="form-control form-control-user" placeholder="VAT Registration No">
+                    <input type="text" name="reg_no"  value="{{$vendor->reg_no}}" class="form-control form-control-user" placeholder="VAT Registration No">
                   </div>
                   @endif
                 </div>
@@ -69,7 +72,7 @@
                 @endif
                 <div class="form-group">
                   <label ><b>Vendor Email</b></label>
-                  <input type="email" name="email" value="{{$vendor->vendor_email}}" class="form-control form-control-user"  placeholder="Email Address">
+                  <input type="email" name="vendor_email" value="{{$vendor->vendor_email}}" class="form-control form-control-user"  placeholder="Email Address">
                 </div>
                 <div class="form-group">
                   <label ><b>Address</b></label>
@@ -134,11 +137,17 @@
                 </div>
                 </div>
                 <br>
-                <a href="{{('/vendor')}}" class="btn btn-primary btn-user">
+                <a href="{{ URL::previous() }}" class="btn btn-primary btn-user">
                   Back
                 </a>
-                
+                @if ($vendor->status === 'Pending')
+                @if (Auth::user()->location === 'ALL')
                     <button type="submit" name="submit" class="btn btn-success btn-user">Update</button>
+                    @else
+                    <button type="submit" name="location" value="{{$vendor->location}}" class="btn btn-success btn-user">Update</button>
+                    @endif
+                    @else
+                    @endif
                     </form>
 
                     </div>

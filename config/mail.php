@@ -2,6 +2,14 @@
 
 return [
 
+
+    'stream' => [
+        'ssl' => [
+           'allow_self_signed' => true,
+           'verify_peer' => false,
+           'verify_peer_name' => false,
+        ],
+     ],
     /*
     |--------------------------------------------------------------------------
     | Mail Driver
@@ -11,12 +19,12 @@ return [
     | sending of e-mail. You may specify which one you're using throughout
     | your application here. By default, Laravel is setup for SMTP mail.
     |
-    | Supported: "smtp", "sendmail", "mailgun", "mandrill", "ses",
-    |            "sparkpost", "postmark", "log", "array"
+    | Supported: "smtp", "sendmail", "mailgun", "ses",
+    |            "postmark", "log", "array"
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'mail'),
+    'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +50,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 2525),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +63,10 @@ return [
     |
     */
 
-    'from' => ['address' => 'noreplyfenaka@gmail.com', 'name' => 'Fenaka ICT Support'],
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Fenaka Support'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +79,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION',),
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Fenaka -Locations
+Fenaka - Vendor Pending
 @endsection
 
 @section('content')
@@ -41,11 +41,11 @@ Fenaka -Locations
           <div class="form-row">
             <div class="form-group col-md-6">
               <label ><b>Contact Person</b></label>
-              <input type="text" name="contact_person" class="form-control" >
+              <input type="text" required name="contact_person" class="form-control" >
             </div>
             <div class="form-group col-md-4">
               <label ><b>Contact Number</b></label>
-              <input type="number" name="contact_number"  class="form-control" min="7000000" max="9999999"  placeholder="7000000 , 9000000">
+              <input type="number" required name="contact_number"  class="form-control" min="7000000" max="9999999"  placeholder="7000000 , 9000000">
             </div>
             <div class="form-group col-md-2">
               <label><b>Documents</b></label>
@@ -126,11 +126,11 @@ Fenaka -Locations
           <div class="form-row">
             <div class="form-group col-md-6">
               <label ><b>Contact Person</b></label>
-              <input type="text" name="contact_person" class="form-control" >
+              <input type="text" required name="contact_person" class="form-control" >
             </div>
             <div class="form-group col-md-4">
               <label ><b>Contact Number</b></label>
-              <input type="number" name="contact_number"  class="form-control" min="7000000" max="9999999" placeholder="7000000 , 9000000">
+              <input type="number" required name="contact_number"  class="form-control" min="7000000" max="9999999" placeholder="7000000 , 9000000">
             </div>
             <div class="form-group col-md-2">
               <label ><b>Documents</b></label>
@@ -189,7 +189,7 @@ Fenaka -Locations
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmail4">VAT Registration No</label>
-              <input type="text" name="reg_no" required class="form-control" placeholder="0000000GST501">
+              <input type="text" name="reg_no"   class="form-control" placeholder="0000000GST501">
             </div>
           </div>
           <div class="form-group">
@@ -203,11 +203,11 @@ Fenaka -Locations
           <div class="form-row">
             <div class="form-group col-md-6">
               <label >Contact Person</label>
-              <input type="text" name="contact_person" class="form-control" >
+              <input type="text" required name="contact_person" class="form-control" >
             </div>
             <div class="form-group col-md-4">
               <label >Contact Number</label>
-              <input type="number" name="contact_number" class="form-control" min="7000000" max="9999999"  placeholder="7000000 , 9000000">
+              <input type="number" required name="contact_number" class="form-control" min="7000000" max="9999999"  placeholder="7000000 , 9000000">
             </div>
             <div class="form-group col-md-2">
               <label >Documents</label>
@@ -217,7 +217,7 @@ Fenaka -Locations
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail4">Fax Number</label>
-              <input type="text"  name="fax_number" required class="form-control" placeholder="Fax Number">
+              <input type="text"  name="fax_number"  class="form-control" placeholder="Fax Number">
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmail4">WebSite</label>
@@ -278,7 +278,7 @@ Fenaka -Locations
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmail4">VAT Registration No</label>
-              <input type="text" name="reg_no" required class="form-control" placeholder="0000000GST501">
+              <input type="text" name="reg_no" class="form-control" placeholder="0000000GST501">
             </div>
           </div>
           <div class="form-group">
@@ -300,11 +300,11 @@ Fenaka -Locations
           <div class="form-row">
             <div class="form-group col-md-6">
               <label >Contact Person</label>
-              <input type="text" name="contact_person" class="form-control" >
+              <input type="text" required name="contact_person" class="form-control" >
             </div>
             <div class="form-group col-md-4">
               <label >Contact Number</label>
-              <input type="number" name="contact_number" class="form-control" min="7000000" max="9999999"  placeholder="7000000 , 9000000">
+              <input type="number" required name="contact_number" class="form-control" min="7000000" max="9999999"  placeholder="7000000 , 9000000">
             </div>
             <div class="form-group col-md-2">
               <label >Documents</label>
@@ -314,7 +314,7 @@ Fenaka -Locations
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail4">Fax Number</label>
-              <input type="text"  name="fax_number" required class="form-control" placeholder="Fax Number">
+              <input type="text"  name="fax_number"  class="form-control" placeholder="Fax Number">
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmail4">WebSite</label>
@@ -354,6 +354,123 @@ Fenaka -Locations
     </div>
   </div>
 </div>
+
+{{-- Reject a vendor form Start --}}
+<div class="modal fade" id="rejectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header btn-danger">
+        <h5 class="modal-title" id="exampleModalLabel">Vendor Request Reject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body btn">
+        <form  action="/vendor-reject" id="rejectedForm" class="user" method="POST" enctype="multipart/form-data">
+          {{ csrf_field() }}
+          {{ method_field('PUT') }}
+            
+            <div class="modal-body">
+            <strong for="recipient-name" class="col-form-label">Are you sure you want to reject this Vendor Request?You CAN'NOT view this Vendor in your list anymore if you Reject</strong>
+            </div>
+            <div class="form-group text-left">
+              <lable>Name:</lable>
+              <input type="text" readonly="readonly" name="name" id="name_reject" value="" class="form-control" >
+            </div>
+
+            <form class="was-validated">
+              <div class="mb-3">
+                <label for="validationTextarea">Reason for Rejection</label>
+                <textarea class="form-control is-invalid" name="rejected_reson" id="validationTextarea" required>Your vendor creation was rejected for one of following reason 
+                  If it is an individual:
+                  - The ID card copy provided is not clear AND/OR 
+                  - No Quotation provided
+                  If it is a Bussiness:
+                  - Business registration certificate
+                  - GST registration Certificate (If not elligable please provide a no-gst letter from the relevent branch)
+                </textarea>
+                <div class="invalid-feedback">
+                  Please enter the reason for rejection.
+                </div>
+              </div>
+            
+  
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+              <button type="submit" name="location" id="location_reject" value="" class="btn btn-danger">Reject</button>
+          </div>
+            
+
+            </div>
+
+          </form>
+      
+    </div>
+  </div>
+</div>
+{{-- Reject a vendor form end --}}
+
+{{-- Create vendor form Start --}}
+<div class="modal fade" id="createdModal" tabindex="-1" role="dialog" aria-labelledby="exampleeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Vendor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <form  action="/vendor-created" id="createdForm" class="user" method="POST" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
+            
+            <div class="modal-body">
+              <fieldset disabled>
+            <div class="form-group">
+              <strong for="recipient-name" class="col-form-label">Vendor Reference Number:</strong>
+              <input type="text" readonly="readonly" name="number" id="vendor_no" value="" class="form-control" >
+            </div>
+          </fieldset>
+            <div class="form-group">
+              <strong for="recipient-name" class="col-form-label">Name:</strong>
+              <input type="text" name="name" readonly="readonly" id="vendor_name" value="" class="form-control" >
+            </div>
+            <fieldset disabled>
+            <div class="form-group">
+              <strong for="recipient-name" class="col-form-label">VAT Registration No / ID Card Number</strong>
+              <input type="text" name="" readonly id="vendor_idcard" value="" class="form-control" >
+            </div>
+          </fieldset>
+            <div class="form-group">
+              <strong for="recipient-name" class="col-form-label">Vendor Number:</strong>
+              <input type="text" required name="vendor_no" class="form-control" >
+            </div>
+  
+      <br>
+
+      <div class="modal-body btn btn-warning">
+          <h6><b>Select Create Vendor if you are sure to Create the Vendor</b> .This Vendor Form will Completed immediately . You can't undo this action</h6>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+           <button type="submit" name="location" id="location_create" value="" class="btn btn-primary">Create</button>
+          </div>
+          </div>
+          
+        
+
+        
+            
+
+            </div>
+
+          </form>
+      
+
+    </div>
+  </div>
+</div>
+{{-- Create vendor form end --}}
 
 <!-- Select Type -->
 <div class="modal fade" id="type" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -397,29 +514,29 @@ Fenaka -Locations
   <div class="card shadow mb-4"> 
     <div class="card-header py-3">
       @if (Auth::user()->location === 'ALL')
-        <button type="button" class="btn btn-warning">
+        <button  type="button" class="btn btn-warning" disabled>
           Pending Vendors <span class="badge badge-light">{{$vendorpending->count('status')}}</span>
-        </button>
-        <button type="button" class="btn btn-success">
-          Created Vendors <span class="badge badge-light">4</span>
-        </button>
-        <button type="button" class="btn btn-danger">
-          Rejected Vendors <span class="badge badge-light">4</span>
-        </button>
+        </button >
+        <a type="button" href="/vendor-create" class="btn btn-success">
+          Created Vendors <span class="badge badge-light">{{$vendorcreated->count('status')}}</span>
+        </a>
+        <a type="button" href="/vendor-reject" class="btn btn-danger">
+          Rejected Vendors <span class="badge badge-light">{{$vendorrejected->count('status')}}</span>
+        </a>
       @else
-        <button type="button" class="btn btn-warning">
+        <button type="button" class="btn btn-warning" disabled>
           Pending Vendors <span class="badge badge-light">{{$vendoruserpending->count('status')}}</span>
         </button>
-        <button type="button" class="btn btn-success">
-          Created Vendors <span class="badge badge-light">4</span>
-        </button>
-        <button type="button" class="btn btn-danger">
-          Rejected Vendors <span class="badge badge-light">4</span>
-        </button>
+        <a type="button" href="/vendor-create" class="btn btn-success">
+          Created Vendors <span class="badge badge-light">{{$vendorusercreated->count('status')}}</span>
+        </a>
+        <a type="button" href="/vendor-reject" class="btn btn-danger">
+          Rejected Vendors <span class="badge badge-light">{{$vendoruserrejected->count('status')}}</span>
+        </a>
       @endif
     </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">All Pending Vendor</h6>
+      <h6 class="m-0 font-weight-bold text-primary">All Pending Vendors</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -427,32 +544,30 @@ Fenaka -Locations
           <thead>
             <tr>
               <th>ID</th>
+              <th>Vendor Reference Number</th>
               <th>Attachments</th>
               <th>Name</th>
               <th>VAT Registration No / ID Card Number</th>
               <th>Address</th>
               <th>Contact Person</th>
               <th>Contact Number</th>
-              <th>Web Site</th>
-              <th>Fax Number</th>
               <th>Location</th>
-              <th>Vendor Email</th>
+              <th>Detail</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>ID</th>
+              <th>Vendor Reference Number</th>
               <th>Attachments</th>
               <th>Name</th>
               <th>VAT Registration No </th>
               <th>Address</th>
               <th>Contact Person</th>
               <th>Contact Number</th>
-              <th>Web Site</th>
-              <th>Fax Number</th>
               <th>Location</th>
-              <th>Vendor Email</th>
+              <th>Detail</th>
               <th>Actions</th>
             </tr>
           </tfoot>
@@ -463,14 +578,17 @@ Fenaka -Locations
               <td>
             {{$data->id}}
           </td>
+          <td>
+            {{$data->number}}
+          </td>
             <td style="text-align: center">
               <a href="{{asset('uploads/Vendor/'.$data->file)}}" class="text-danger"><i class="far fa-file-pdf fa-3x"></i><br>{{$data->number}}</a>
             </td>
           <td>
-            {{$data->name}} ({{$data->id_card}})
+            {{$data->name}} 
           </td>
           <td>
-            {{$data->reg_no}}
+            {{$data->reg_no}} {{$data->id_card}}
           </td>
           <td>
             {{$data->address}}
@@ -482,21 +600,24 @@ Fenaka -Locations
             {{$data->contact_number}}
           </td>
           <td>
-            {{$data->website}}
-          </td>
-          <td>
-            {{$data->fax_number}}
-          </td>
-          <td>
             {{$data->location}}
           </td>
-          <td>
-            {{$data->vendor_email}}
+          <td style="text-align: center;">
+            @if ($data->urgent === 'Urgent')
+            <span style="font-size: 2em; color: red; text-align: center;">
+              <i class="fas fa-exclamation"></i>
+            </span>
+            @else
+            @endif
+            <br>
+            <b>Vendor Type: </b>  {{$data->vendor_type}}
+            <b>Requested By: </b>  {{$data->createdby}}
+            <b>Requested Date: </b>  {{$data->created_at}}
           </td>
           <td>
-            <a href="{{ url('vendor-edit/'.$data->id) }}" class="btn btn-info rejected btn-block">    View    </a>
+            <a href="{{ url('vendor-edit/'.$data->id) }}" class="btn btn-info btn-block">    View    </a>
 
-            <a class="btn btn-success edit btn-block" href="#">Create</a>
+            <a class="btn btn-success created btn-block" href="#">Create</a>
             
             <a href="#" class="btn btn-danger rejected btn-block">Reject</a>
 
@@ -507,43 +628,49 @@ Fenaka -Locations
             @else
             @foreach ($vendoruserpending as $data)
            <tr>
-              <td>
-            {{$data->id}}
-          </td>
-            <td style="text-align: center">
-              <a href="{{asset('uploads/Vendor/'.$data->file)}}" class="text-danger"><i class="far fa-file-pdf fa-3x"></i><br>{{$data->number}}</a>
+            <td>
+              {{$data->id}}
             </td>
-          <td>
-            {{$data->name}} ({{$data->id_card}})
-          </td>
-          <td>
-            {{$data->reg_no}}
-          </td>
-          <td>
-            {{$data->address}}
-          </td>
-          <td>
-            {{$data->contact_person}}
-          </td>
-          <td>
-            {{$data->contact_number}}
-          </td>
-          <td>
-            {{$data->website}}
-          </td>
-          <td>
-            {{$data->fax_number}}
-          </td>
-          <td>
-            {{$data->location}}
-          </td>
-          <td>
-            {{$data->vendor_email}}
-          </td>
-          <td>
-            <a href="{{ url('vendor-edit/'.$data->id) }} " class="btn btn-info rejected btn-block">    View    </a>
-
-          </td>
+            <td>
+              {{$data->number}}
+            </td>
+              <td style="text-align: center">
+                <a href="{{asset('uploads/Vendor/'.$data->file)}}" class="text-danger"><i class="far fa-file-pdf fa-3x"></i><br>{{$data->number}}</a>
+              </td>
+            <td>
+              {{$data->name}} 
+            </td>
+            <td>
+              {{$data->reg_no}} {{$data->id_card}}
+            </td>
+            <td>
+              {{$data->address}}
+            </td>
+            <td>
+              {{$data->contact_person}}
+            </td>
+            <td>
+              {{$data->contact_number}}
+            </td>
+            <td>
+              {{$data->location}}
+            </td>
+            <td style="text-align: center;">
+              @if ($data->urgent === 'Urgent')
+              <span style="font-size: 2em; color: red; text-align: center;">
+                <i class="fas fa-exclamation"></i>
+              </span>
+              @else
+              @endif
+              <br>
+              <b>Vendor Type: </b>  {{$data->vendor_type}}
+              <b>Requested By: </b>  {{$data->createdby}}
+              <b>Requested Date: </b>  {{$data->created_at}}
+            </td>
+            <td>
+              <a href="{{ url('vendor-edit/'.$data->id) }}" class="btn btn-info btn-block">    View    </a>
+            </td>
+          
             </tr>
             @endforeach
             @endif
@@ -559,6 +686,53 @@ Fenaka -Locations
   $(document).ready( function () {
     $('#datatable').DataTable();
 } );
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+      var table = $('#datatable').DataTable();
+      //Start Edit Record
+      table.on('click','.rejected',function(){
+        $tr = $(this).closest('tr');
+        if ($($tr).hasClass('child')) {
+          $tr = $tr.prev('.parent');
+        }
+
+        var data = table.row($tr).data();
+        console.log(data);
+
+        $('#name_reject').val(data[3]);
+        $('#idcard_reject').val(data[4]);
+        $('#location_reject').val(data[8]);
+       
+
+          $('#rejectedForm').attr('action', '/vendor-reject/'+data[0]);
+          $('#rejectedModal').modal('show');
+        });
+    });
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+      var table = $('#datatable').DataTable();
+      //Start Edit Record
+      table.on('click','.created',function(){
+        $tr = $(this).closest('tr');
+        if ($($tr).hasClass('child')) {
+          $tr = $tr.prev('.parent');
+        }
+
+        var data = table.row($tr).data();
+        console.log(data);
+
+        $('#vendor_no').val(data[1]);
+        $('#vendor_name').val(data[3]);
+        $('#vendor_idcard').val(data[4]);
+        $('#location_create').val(data[8]);
+     
+
+          $('#createdForm').attr('action', '/vendor-created/'+data[0]);
+          $('#createdModal').modal('show');
+        });
+    });
 </script>
 @endsection
 

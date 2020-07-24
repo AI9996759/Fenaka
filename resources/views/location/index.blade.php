@@ -113,9 +113,9 @@ Fenaka -Locations
             {{$data->view}}
           </td>
           <td>
-            <a class="btn btn-success edit btn-block" href="#">Activate</a>
+            <a class="btn btn-success edit btn-block" href="#">Edit</a>
             
-            <a href="#" class="btn btn-danger rejected btn-block">    Reject    </a>
+            <a href="#" class="btn btn-danger rejected btn-block">    Delete    </a>
           </td>
             </tr>
             @endforeach

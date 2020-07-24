@@ -21,6 +21,10 @@ class PermissionTableSeeder extends Seeder
            'role-create',
            'role-edit',
            'role-delete',
+           'vendor-list',
+           'vendor-create',
+           'vendor-edit',
+           'vendor-reject',
         ];
 
 
